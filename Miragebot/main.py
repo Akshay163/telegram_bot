@@ -6,7 +6,7 @@ Created on Mon Jan 17 18:34:35 2022
 """
 import constants as keys
 from telegram.ext import *
-
+import os
 import responses_mirage as R
 
 print("Bot started...")
@@ -23,16 +23,19 @@ def contract(update, context):
     update.message.reply_text("Mirage contract address: 0xFb83B2c9f65f92937fd8798Acf8A79571b864273")
 
 def doc(update, context):
-    update.message.reply_text("Here is the documentation link: {os.linesep}https://zenith-aries-078.notion.site/Mirage-Labs-0178eb74ff3145d09e53eaad2a5fa2c6")
+    update.message.reply_text(f"Here is the documentation link: {os.linesep}https://zenith-aries-078.notion.site/Mirage-Labs-0178eb74ff3145d09e53eaad2a5fa2c6")
 
 def website(update, context):
-    update.message.reply_text("Check out Mirage's website: https://www.mirage.market/")
+    update.message.reply_text(f"Check out Mirage's website: {os.linesep}https://www.mirage.market/")
 
 def chart(update, context):
-    update.message.reply_text("Realtime price chart for Miragon dexscreener")
+    update.message.reply_text(f"Realtime price chart for Mirage on dexscreener: {os.linesep}https://dexscreener.com/oasisemerald/0xFb83B2c9f65f92937fd8798Acf8A79571b864273")
 
 def buy(update, context):
-    update.message.reply_text("Hello Wanderer! Type ""help"" to get more Mirage related detailes")
+    update.message.reply_text(f"Buy mirage on Duneswap: {os.linesep}https://www.duneswap.com/exchange/swap?inputCurrency=0x5c78a65ad6d0ec6618788b6e8e211f31729111ca&outputCurrency=0xfb83b2c9f65f92937fd8798acf8a79571b864273")
+
+def lp(update, context):
+    update.message.reply_text(f"LP locked: {os.linesep}https://explorer.emerald.oasis.dev/tx/0xa3dd0e2f5f169cce7487d4b345c378c4f19fefb7f2ad6e5a2000ab84104b8a8d/token-transfers")
 
 def handle_message(update, context):
     text = str(update.message.text).lower()
@@ -50,6 +53,12 @@ def main():
     
     dispatcher.add_handler(CommandHandler("bot", start_command))
     dispatcher.add_handler(CommandHandler("help", help_command))
+    dispatcher.add_handler(CommandHandler("contract", contract))
+    dispatcher.add_handler(CommandHandler("doc", doc))
+    dispatcher.add_handler(CommandHandler("website", website))
+    dispatcher.add_handler(CommandHandler("chart", chart))
+    dispatcher.add_handler(CommandHandler("buy", buy))
+    dispatcher.add_handler(CommandHandler("lp", lp))
     
     dispatcher.add_handler(MessageHandler(Filters.text, handle_message))
     
